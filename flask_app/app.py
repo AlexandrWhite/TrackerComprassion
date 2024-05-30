@@ -22,5 +22,14 @@ def video():
     return Response(new_frame,
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
+@app.route('/lags', methods=['POST','GET'])
+def lags():
+    print('YOU CLICK')
+    if original_vp.lags:
+        original_vp.lags = False 
+    else:
+        original_vp.lags = True
+    return ';',204
+
 if __name__ == '__main__':
     app.run(debug=True)

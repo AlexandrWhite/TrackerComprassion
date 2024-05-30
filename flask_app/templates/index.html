@@ -2,6 +2,23 @@
 <html>
     <head>
         <title>Тестирование алгоритмов трекинга</title>
+        <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css')}}">
     </head>
-    <img id="videoimg" src="{{url_for('video')}}"  style="cursor: crosshair;" width="30%">
+
+    <script>
+        function click_lags(){
+            console.log(this)
+            fetch('/lags').then(response => {})
+        }
+    </script>
+
+    <h1>Test</h1>
+
+
+    <img  id="videoimg" src="{{url_for('video')}}"  style="cursor: crosshair;" width="30%">
+
+
+    <button onclick="click_lags()">
+        Имитировать лаги
+    </button>
 </html>

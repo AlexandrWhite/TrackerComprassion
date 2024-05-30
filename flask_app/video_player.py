@@ -6,11 +6,15 @@ class VideoPlayer:
     def __init__(self,  process_fucntion, path_to_video=0):
         self.start_video(path_to_video)
         self.process_function = process_fucntion
+        self.lags = False
 
     def start_video(self, path_to_video=0):
         self.cap = cv2.VideoCapture(path_to_video)
         self.fps = FPS().start()
+
         self.start = time.time() 
+
+        
         self.frames_cnt = 0 
         print(self.cap.get(cv2.CAP_PROP_FPS))
     
@@ -38,10 +42,15 @@ class VideoPlayer:
                 print("[INFO] approx. FPS: {:.2f}".format(self.fps.fps()))
                 return None
             else:
+                
+                if self.lags:
+                    time.sleep(3)
+
                 frame = self.process_function(frame, time.time()-start_time)
                 self.frames_cnt += 1
                 self.display_fps(frame)
-
+                
+                
 
                 compression_level = 100
                 buffer = cv2.imencode('.jpg',frame,[cv2.IMWRITE_JPEG_QUALITY, compression_level])[1]
