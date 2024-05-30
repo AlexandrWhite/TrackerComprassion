@@ -1,13 +1,11 @@
 import cv2 
 import time 
 import threading
-
           
 
 class VideoPlayer:
 
     def __init__(self,  process_fucntion, path_to_video=0):
-        #self.start_video(path_to_video)
         self.path_to_video = path_to_video
         self.process_function = process_fucntion
     
@@ -34,7 +32,7 @@ class VideoPlayer:
         font = cv2.FONT_HERSHEY_SIMPLEX
         # cv2.putText(frame, f'Frames {self.frames_cnt}', (7, 170), font, 1, (200, 255, 0), 3, cv2.LINE_AA) 
         # cv2.putText(frame, f'Time {int(elapsed_time)//60}:{int(elapsed_time)%60}', (7, 70), font, 1, (200, 255, 0), 3, cv2.LINE_AA)
-        cv2.putText(frame, f'FPS {self.fps}', (7, 40), font, 1, (200, 255, 0), 3, cv2.LINE_AA)
+        cv2.putText(frame, f'FPS {self.fps}', (7, 25), font, 0.7, (200, 255, 0), 2, cv2.LINE_AA)
 
     
     def get_frames(self):
@@ -50,9 +48,11 @@ class VideoPlayer:
                 frame = self.process_function(frame)
                 self.frames_cnt += 1
 
+                frame = cv2.cvtColor(frame, cv2.COLOR_GRAY2BGR)
                 self.display_fps(frame)
                 
-                compression_level = 30
+
+                compression_level = 100
                 buffer = cv2.imencode('.jpg',frame,[cv2.IMWRITE_JPEG_QUALITY, compression_level])[1]
                 frame = buffer.tobytes()
                 yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')    
