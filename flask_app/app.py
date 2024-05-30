@@ -4,10 +4,13 @@ import video_process
 
 app = Flask(__name__)
 
-base_video = 'video\\test.mp4'
+base_video = 'video\\test2.mp4'
 
 original_vp = VideoPlayer(process_fucntion=video_process.original_with_fps,
                           path_to_video=base_video)
+
+original_vp = VideoPlayer(process_fucntion=video_process.original_with_fps)
+
 
 @app.route('/')
 def index():
