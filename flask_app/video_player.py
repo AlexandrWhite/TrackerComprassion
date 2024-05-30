@@ -48,7 +48,7 @@ class VideoPlayer:
                 frame = self.process_function(frame)
                 self.frames_cnt += 1
 
-                frame = cv2.cvtColor(frame, cv2.COLOR_GRAY2BGR)
+                #frame = cv2.cvtColor(frame, cv2.COLOR_GRAY2BGR)
                 self.display_fps(frame)
                 
 
