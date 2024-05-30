@@ -6,5 +6,5 @@ def gray(frame):
     return frame
 
 
-def original_with_fps(frame):
+def original(frame):
     return frame

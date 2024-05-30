@@ -11,7 +11,6 @@ class VideoPlayer:
         #self.start_video(path_to_video)
         self.path_to_video = path_to_video
         self.process_function = process_fucntion
-        self.lags = False
     
     def count_frames_per_second(self):
         while self.cap.isOpened():
@@ -54,14 +53,7 @@ class VideoPlayer:
                 self.cap.release()
                 return None
             else:
-
-
-                if self.lags:
-                    time.sleep(0.6)
-
                 frame = self.process_function(frame)
-
-                
                 self.frames_cnt += 1
 
                 self.display_fps(frame)

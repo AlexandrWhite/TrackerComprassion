@@ -10,7 +10,7 @@ base_video = 'video\\test2.mp4'
 #                            path_to_video=base_video)
 
 original_vp = VideoPlayer(process_fucntion=video_process.gray, path_to_video=base_video)
-second_vp = VideoPlayer(process_fucntion=video_process.original_with_fps, path_to_video=base_video)
+second_vp = VideoPlayer(process_fucntion=video_process.original, path_to_video=base_video)
 
 @app.route('/')
 def index():
@@ -30,14 +30,6 @@ def video2():
     return Response(new_frame,
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
-
-@app.route('/lags', methods=['POST','GET'])
-def lags():
-    if original_vp.lags:
-        original_vp.lags = False 
-    else:
-        original_vp.lags = True
-    return ';',204
 
 if __name__ == '__main__':
     app.run(debug=True)
