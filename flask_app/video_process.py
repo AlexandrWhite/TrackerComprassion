@@ -1,11 +1,10 @@
 import time 
 import cv2 
 
-def original(frame):
+def gray(frame):
+    frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     return frame
 
-def original_with_avg_fps(frame, read_frame_time):
-    pass
 
-def original_with_fps(frame, read_frame_time):
+def original_with_fps(frame):
     return frame
