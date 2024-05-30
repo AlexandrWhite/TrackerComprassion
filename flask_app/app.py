@@ -10,7 +10,6 @@ base_video = 'video\\test2.mp4'
 #                            path_to_video=base_video)
 
 original_vp = VideoPlayer(process_fucntion=video_process.gray, path_to_video=base_video)
-second_vp = VideoPlayer(process_fucntion=video_process.original, path_to_video=base_video)
 
 @app.route('/')
 def index():
@@ -23,12 +22,6 @@ def video():
     return Response(new_frame,
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
-@app.route('/video2')
-def video2():
-    second_vp.start_video()
-    new_frame = second_vp.get_frames()
-    return Response(new_frame,
-                    mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
 if __name__ == '__main__':

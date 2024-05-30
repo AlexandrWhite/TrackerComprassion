@@ -17,7 +17,6 @@ class VideoPlayer:
             old_frame_cnt = self.frames_cnt
             time.sleep(1)
             current_frame_cnt = self.frames_cnt
-            print(self.fps)
             self.fps = current_frame_cnt-old_frame_cnt
 
     def start_video(self):
@@ -29,8 +28,6 @@ class VideoPlayer:
         self.fps = 0
         self.time_thread = threading.Thread(target=self.count_frames_per_second) 
         self.time_thread.start()
-
-        print(self.cap.get(cv2.CAP_PROP_FPS))
     
    
 
