@@ -44,8 +44,6 @@ class VideoPlayer:
             start_time = time.time()
             ret, frame = self.cap.read()
             
-
-
             if not ret:
                 self.cap.release()
                 return None

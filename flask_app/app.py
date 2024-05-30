@@ -4,7 +4,7 @@ import video_process
 
 app = Flask(__name__)
 
-base_video = 'video\\test2.mp4'
+base_video = 'video\\test.mp4'
 
 # original_vp = VideoPlayer(process_fucntion=video_process.original_with_fps,
 #                            path_to_video=base_video)
@@ -19,10 +19,7 @@ def index():
 def video():
     original_vp.start_video()
     new_frame = original_vp.get_frames()
-    return Response(new_frame,
-                    mimetype='multipart/x-mixed-replace; boundary=frame')
-
-
+    return Response(new_frame,mimetype='multipart/x-mixed-replace; boundary=frame')
 
 if __name__ == '__main__':
     app.run(debug=True)
