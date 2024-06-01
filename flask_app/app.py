@@ -1,10 +1,23 @@
 from flask import Flask,render_template, Response 
 from video_player import VideoPlayer
 import video_process 
+import server_thread 
 
 app = Flask(__name__)
 
-base_video = 'video\\test.mp4'
+def start_server():
+    global server
+    # App routes defined here
+    server = server_thread.ServerThread(app)
+    server.start()
+    print('server started')
+
+def stop_server():
+    global server
+    server.shutdown()
+
+
+base_video = 'video/test.mp4'
 
 # original_vp = VideoPlayer(process_fucntion=video_process.original_with_fps,
 #                            path_to_video=base_video)
