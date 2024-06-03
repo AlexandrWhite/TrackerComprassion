@@ -9,8 +9,7 @@ print(os.path.abspath(os.curdir))
 
 base_video = 'video/test2.mp4'
 
-original_vp = VideoPlayer(process_fucntion=video_process.original, 
-                          path_to_video=base_video)
+original_vp = VideoPlayer(process_fucntion=video_process.original, path_to_video=base_video)
 
 @app.route('/')
 def index():

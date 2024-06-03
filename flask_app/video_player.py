@@ -18,7 +18,7 @@ class VideoPlayer:
             
 
     def start_video(self):
-        self.cap = cv2.VideoCapture(self.path_to_video, cv2.CAP_FFMPEG)
+        self.cap = cv2.VideoCapture(self.path_to_video)
         self.frames_cnt = 0
 
         self.start_time = time.time() 
@@ -27,7 +27,6 @@ class VideoPlayer:
         self.time_thread = threading.Thread(target=self.count_frames_per_second) 
         self.time_thread.start()
     
-   
 
     def display_fps(self,frame):
         font = cv2.FONT_HERSHEY_SIMPLEX
@@ -35,12 +34,16 @@ class VideoPlayer:
         cv2.putText(frame, f'FPS: {self.fps}', (7, 50), font, 1, (255, 0, 0), 2, cv2.LINE_AA)
 
     def display_videotime(self, frame):
-        videofile_msec = self.cap.get(cv2.CAP_PROP_POS_MSEC)
-        seconds = videofile_msec/1000
         font = cv2.FONT_HERSHEY_SIMPLEX
-       
-        cv2.putText(frame, f'Video time: {int(seconds//60)}:{int(seconds)%60}', (7, 100), font, 1, (0, 0, 0), 10, cv2.LINE_AA)
-        cv2.putText(frame, f'Video time: {int(seconds//60)}:{int(seconds)%60}', (7, 100), font, 1, (0, 255, 0), 2, cv2.LINE_AA)
+        if self.path_to_video == 0:
+            cv2.putText(frame, f'Video time: undefined', (7, 100), font, 1, (0, 0, 0), 10, cv2.LINE_AA)
+            cv2.putText(frame, f'Video time: undefined', (7, 100), font, 1, (0, 255, 0), 2, cv2.LINE_AA)
+        else:
+            videofile_msec = self.cap.get(cv2.CAP_PROP_POS_MSEC)
+            seconds = videofile_msec/1000
+            
+            cv2.putText(frame, f'Video time: {int(seconds//60)}:{int(seconds)%60}', (7, 100), font, 1, (0, 0, 0), 10, cv2.LINE_AA)
+            cv2.putText(frame, f'Video time: {int(seconds//60)}:{int(seconds)%60}', (7, 100), font, 1, (0, 255, 0), 2, cv2.LINE_AA)
 
     def display_realtime(self, frame):
         elapsed_time = (time.time() - self.start_time)

@@ -15,7 +15,6 @@ import torch
 
 
 def original(frame):
-
     return frame
 
 if __name__ == '__main__':
