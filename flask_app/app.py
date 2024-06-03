@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 base_video = 'video/test.mp4'
 
-original_vp = VideoPlayer(process_fucntion=flask_app.video_process.original, 
+original_vp = VideoPlayer(process_fucntion=video_process.original, 
                           path_to_video=base_video)
 
 @app.route('/')
