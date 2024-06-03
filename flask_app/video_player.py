@@ -49,7 +49,7 @@ class VideoPlayer:
                 self.display_fps(frame)
                 
 
-                compression_level = 30
+                compression_level = 2
                 buffer = cv2.imencode('.jpg',frame,[cv2.IMWRITE_JPEG_QUALITY, compression_level])[1]
                 frame = buffer.tobytes()
                 yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')    
