@@ -12,9 +12,9 @@ class VideoPlayer:
     def count_frames_per_second(self):
         while self.cap.isOpened():
             old_frame_cnt = self.frames_cnt
-            time.sleep(0.5)
+            time.sleep(1)
             current_frame_cnt = self.frames_cnt
-            self.fps = 2*(current_frame_cnt-old_frame_cnt)
+            self.fps = current_frame_cnt-old_frame_cnt
             
 
     def start_video(self):
@@ -36,6 +36,7 @@ class VideoPlayer:
 
     def display_videotime(self, frame):
         videofile_fps = self.cap.get(cv2.CAP_PROP_FPS)
+        print(videofile_fps)
         seconds = self.frames_cnt//videofile_fps
         font = cv2.FONT_HERSHEY_SIMPLEX
        
