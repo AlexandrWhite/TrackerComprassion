@@ -13,7 +13,6 @@ def yolo(frame):
     return frame
 
 
-
 def original(frame):
     return frame
 
