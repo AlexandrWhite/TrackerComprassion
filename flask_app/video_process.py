@@ -15,7 +15,7 @@ import torch
 
 
 def original(frame):
-    frame = cv2.resize(frame, (640,480))
+
     return frame
 
 if __name__ == '__main__':

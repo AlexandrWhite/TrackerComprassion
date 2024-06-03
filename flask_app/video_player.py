@@ -1,7 +1,7 @@
 import cv2 
 import time 
 import threading
-          
+import time     
 
 class VideoPlayer:
 
@@ -15,10 +15,13 @@ class VideoPlayer:
             time.sleep(1)
             current_frame_cnt = self.frames_cnt
             self.fps = current_frame_cnt-old_frame_cnt
+            
 
     def start_video(self):
         self.cap = cv2.VideoCapture(self.path_to_video)
         self.frames_cnt = 0
+
+        self.start_time = time.time() 
 
         self.fps = 0
         self.time_thread = threading.Thread(target=self.count_frames_per_second) 
@@ -28,11 +31,24 @@ class VideoPlayer:
 
     def display_fps(self,frame):
         font = cv2.FONT_HERSHEY_SIMPLEX
-        # cv2.putText(frame, f'Frames {self.frames_cnt}', (7, 170), font, 1, (200, 255, 0), 3, cv2.LINE_AA) 
-        # cv2.putText(frame, f'Time {int(elapsed_time)//60}:{int(elapsed_time)%60}', (7, 70), font, 1, (200, 255, 0), 3, cv2.LINE_AA)
-        cv2.putText(frame, f'FPS {self.fps}', (7, 25), font, 0.7, (200, 255, 0), 2, cv2.LINE_AA)
+        cv2.putText(frame, f'FPS: {self.fps}', (7, 50), font, 1, (0, 0, 0), 10, cv2.LINE_AA)
+        cv2.putText(frame, f'FPS: {self.fps}', (7, 50), font, 1, (255, 0, 0), 2, cv2.LINE_AA)
 
-    
+    def display_videotime(self, frame):
+        videofile_fps = self.cap.get(cv2.CAP_PROP_FPS)
+        seconds = self.frames_cnt//videofile_fps
+        font = cv2.FONT_HERSHEY_SIMPLEX
+       
+        cv2.putText(frame, f'Video time: {int(seconds)//60}:{int(seconds)%60}', (7, 100), font, 1, (0, 0, 0), 10, cv2.LINE_AA)
+        cv2.putText(frame, f'Video time: {int(seconds)//60}:{int(seconds)%60}', (7, 100), font, 1, (0, 255, 0), 2, cv2.LINE_AA)
+
+    def display_realtime(self, frame):
+        elapsed_time = (time.time() - self.start_time)
+        font = cv2.FONT_HERSHEY_SIMPLEX
+        
+        cv2.putText(frame, f'Real time: {int(elapsed_time)//60}:{int(elapsed_time)%60}', (7, 150), font, 1, (0, 0, 0), 10, cv2.LINE_AA)
+        cv2.putText(frame, f'Real time: {int(elapsed_time)//60}:{int(elapsed_time)%60}', (7, 150), font, 1, (0, 0, 255), 2, cv2.LINE_AA)
+
     def get_frames(self):
 
         while self.cap.isOpened():
@@ -47,9 +63,10 @@ class VideoPlayer:
 
                 #frame = cv2.cvtColor(frame, cv2.COLOR_GRAY2BGR)
                 self.display_fps(frame)
-                
+                self.display_realtime(frame)
+                self.display_videotime(frame)
 
-                compression_level = 25
+                compression_level = 80
                 buffer = cv2.imencode('.jpg',frame,[cv2.IMWRITE_JPEG_QUALITY, compression_level])[1]
                 frame = buffer.tobytes()
                 yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')    
