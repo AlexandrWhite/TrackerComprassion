@@ -1,7 +1,6 @@
 from flask import Flask,render_template, Response 
-from flask_app.video_player import VideoPlayer
-import flask_app.video_process 
-from flask_app.server_thread import ServerThread
+from video_player import VideoPlayer
+import video_process 
 
 app = Flask(__name__)
 
