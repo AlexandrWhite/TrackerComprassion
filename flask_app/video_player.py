@@ -18,7 +18,6 @@ class VideoPlayer:
 
     def start_video(self):
         self.cap = cv2.VideoCapture(self.path_to_video)
-        
         self.start = time.time()
         self.frames_cnt = 0
 
