@@ -1,8 +1,11 @@
 from flask import Flask,render_template, Response 
 from video_player import VideoPlayer
 import video_process 
+import os 
 
 app = Flask(__name__)
+
+print(os.path.abspath(os.curdir))
 
 base_video = '../video/test.mp4'
 
