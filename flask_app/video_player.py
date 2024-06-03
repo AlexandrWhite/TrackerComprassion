@@ -12,9 +12,9 @@ class VideoPlayer:
     def count_frames_per_second(self):
         while self.cap.isOpened():
             old_frame_cnt = self.frames_cnt
-            time.sleep(1)
+            time.sleep(0.5)
             current_frame_cnt = self.frames_cnt
-            self.fps = current_frame_cnt-old_frame_cnt
+            self.fps = 2*(current_frame_cnt-old_frame_cnt)
             
 
     def start_video(self):
