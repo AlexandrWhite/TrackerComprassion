@@ -4,7 +4,7 @@ import video_process
 
 app = Flask(__name__)
 
-base_video = 'flask_app/video/test.mp4'
+base_video = '../video/test.mp4'
 
 original_vp = VideoPlayer(process_fucntion=video_process.original, 
                           path_to_video=base_video)
