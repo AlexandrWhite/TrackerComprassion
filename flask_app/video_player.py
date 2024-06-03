@@ -18,7 +18,6 @@ class VideoPlayer:
 
     def start_video(self):
         self.cap = cv2.VideoCapture(self.path_to_video)
-        self.start = time.time()
         self.frames_cnt = 0
 
         self.fps = 0
@@ -37,7 +36,6 @@ class VideoPlayer:
     def get_frames(self):
 
         while self.cap.isOpened():
-            start_time = time.time()
             ret, frame = self.cap.read()
             
             if not ret:
@@ -51,7 +49,7 @@ class VideoPlayer:
                 self.display_fps(frame)
                 
 
-                compression_level = 100
+                compression_level = 30
                 buffer = cv2.imencode('.jpg',frame,[cv2.IMWRITE_JPEG_QUALITY, compression_level])[1]
                 frame = buffer.tobytes()
                 yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')    
