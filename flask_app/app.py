@@ -1,15 +1,14 @@
 from flask import Flask,render_template, Response 
-from video_player import VideoPlayer
-import video_process 
+from flask_app.video_player import VideoPlayer
+import flask_app.video_process 
+from flask_app.server_thread import ServerThread
 
 app = Flask(__name__)
 
 base_video = 'video/test.mp4'
 
-# original_vp = VideoPlayer(process_fucntion=video_process.original_with_fps,
-#                            path_to_video=base_video)
-
-original_vp = VideoPlayer(process_fucntion=video_process.original, path_to_video=base_video)
+original_vp = VideoPlayer(process_fucntion=flask_app.video_process.original, 
+                          path_to_video=base_video)
 
 @app.route('/')
 def index():
