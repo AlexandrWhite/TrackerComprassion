@@ -35,13 +35,12 @@ class VideoPlayer:
         cv2.putText(frame, f'FPS: {self.fps}', (7, 50), font, 1, (255, 0, 0), 2, cv2.LINE_AA)
 
     def display_videotime(self, frame):
-        videofile_fps = self.cap.get(cv2.CAP_PROP_FPS)
-        print(videofile_fps)
-        seconds = self.frames_cnt//videofile_fps
+        videofile_msec = self.cap.get(cv2.CAP_PROP_POS_MSEC)
+        seconds = videofile_msec/1000
         font = cv2.FONT_HERSHEY_SIMPLEX
        
-        cv2.putText(frame, f'Video time: {int(seconds)//60}:{int(seconds)%60}', (7, 100), font, 1, (0, 0, 0), 10, cv2.LINE_AA)
-        cv2.putText(frame, f'Video time: {int(seconds)//60}:{int(seconds)%60}', (7, 100), font, 1, (0, 255, 0), 2, cv2.LINE_AA)
+        cv2.putText(frame, f'Video time: {int(seconds//60)}:{int(seconds)%60}', (7, 100), font, 1, (0, 0, 0), 10, cv2.LINE_AA)
+        cv2.putText(frame, f'Video time: {int(seconds//60)}:{int(seconds)%60}', (7, 100), font, 1, (0, 255, 0), 2, cv2.LINE_AA)
 
     def display_realtime(self, frame):
         elapsed_time = (time.time() - self.start_time)
