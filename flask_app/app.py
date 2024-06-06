@@ -3,6 +3,9 @@ from video_player import VideoPlayer
 import video_process 
 import os 
 
+#pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+#pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+
 app = Flask(__name__)
 
 base_video = 'video/evening.mp4'
