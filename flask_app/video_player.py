@@ -31,7 +31,7 @@ class VideoPlayer:
     def display_fps(self,frame):
         font = cv2.FONT_HERSHEY_SIMPLEX
         cv2.putText(frame, f'FPS: {self.fps}', (7, 50), font, 1, (0, 0, 0), 10, cv2.LINE_AA)
-        cv2.putText(frame, f'FPS: {self.fps}', (7, 50), font, 1, (255, 0, 0), 2, cv2.LINE_AA)
+        cv2.putText(frame, f'FPS: {self.fps}', (7, 50), font, 1, (255, 255, 255), 2, cv2.LINE_AA)
 
     def display_videotime(self, frame):
         font = cv2.FONT_HERSHEY_SIMPLEX
