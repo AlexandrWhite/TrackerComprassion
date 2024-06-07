@@ -3,7 +3,7 @@ import torch
 from ultralytics import YOLO 
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
-model = YOLO('detection_models/yolov8n.pt').to(device)
+model = YOLO('detection_models/yolov8m.pt').to(device)
 model.fuse()
 
 def botsort(frame):
