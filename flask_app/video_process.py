@@ -18,7 +18,10 @@ def bytetrack(frame):
     results = model.track(frame, tracker='bytetrack.yaml', verbose=False, classes=[2,3,5,7], imgsz=imgsz, device='gpu')
     frame = results[0].plot()
     return frame
-    
+
+
+from flask_app.trackers.sort.sort import Sort 
+
 
 def original(frame):
     return frame
