@@ -6,11 +6,18 @@ device = 'cuda' if torch.cuda.is_available() else 'cpu'
 model = YOLO('detection_models/yolov8x.pt').to(device)
 model.fuse()
 
-def yolo(frame):
+def botsort(frame):
     imgsz = 320
     results = model.track(frame, tracker='botsort.yaml', verbose=False, classes=[2,3,5,7], imgsz=imgsz, device='gpu')
     frame = results[0].plot()
     return frame
+
+def bytetrack(frame):
+    imgsz = 320
+    results = model.track(frame, tracker='bytetrack.yaml', verbose=False, classes=[2,3,5,7], imgsz=imgsz, device='gpu')
+    frame = results[0].plot()
+    return frame
+    
 
 def original(frame):
     return frame
