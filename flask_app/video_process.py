@@ -15,10 +15,8 @@ def botsort(frame):
 
 def bytetrack(frame):
     imgsz = 320
-    frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     results = model.track(frame, tracker='bytetrack.yaml', verbose=False, classes=[2,3,5,7], imgsz=imgsz, device='gpu')
     frame = results[0].plot()
-    frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
     return frame
     
 
