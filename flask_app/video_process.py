@@ -48,10 +48,6 @@ def original(frame):
 
 
 
-def ucmc_tracker(frame):
-    imgsz = 320
-    results = model(frame, verbose=False, classes=[2,3,5,7], imgsz=imgsz)
-
 
 if __name__ == '__main__':
     print(f'Using device: {device}')
