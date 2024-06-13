@@ -2,3 +2,4 @@ flask
 ultralytics
 filterpy
 scikit-image
+supervision

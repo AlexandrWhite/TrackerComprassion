@@ -6,7 +6,7 @@ import os
 app = Flask(__name__)
 
 base_video = 'video/evening.mp4'
-original_vp = VideoPlayer(process_fucntion=video_process.sort, path_to_video=base_video)
+original_vp = VideoPlayer(process_fucntion=video_process.bytetrack, path_to_video=base_video)
 byte_vp = VideoPlayer(process_fucntion=video_process.bytetrack, path_to_video=base_video)
 
 
